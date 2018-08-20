@@ -63,7 +63,7 @@ public abstract class RentalProperty {
         return this.typeOfProperty;
     }
 
-    int getNumberOfRecords() {
+    private int getNumberOfRecords() {
         int numOfRecords = 0;
         int i;
         for (i = 0; i < 10; i++) {
@@ -77,14 +77,9 @@ public abstract class RentalProperty {
         return numOfRecords;
     }
 
-    boolean checkRentDate(DateTime rentDate) {
-        if (DateTime.diffDays(rentDate, new DateTime()) >= 0) {
-            return true;
-        }
-        else {
-            // System.out.println("Need to rent for today and future.");
-            return false;
-        }
+    private boolean checkRentDate(DateTime rentDate) {
+        // System.out.println("Need to rent for today and future.");
+        return (DateTime.diffDays(rentDate, new DateTime()) >= 0);
     }
 
     boolean checkAvailability(String customerId, DateTime rentDate, int rentalLength) {
@@ -167,7 +162,7 @@ public abstract class RentalProperty {
         }
     }
 
-    int findRentalRecord(String recordId) {
+    private int findRentalRecord(String recordId) {
         int end = this.getNumberOfRecords();
         int i;
         boolean ifFound = false;
@@ -208,7 +203,7 @@ public abstract class RentalProperty {
             int year = Integer.valueOf(parseDate.substring(6,10));
             DateTime rtnDate = new DateTime(day, month, year);
             this.rentalRecord[targetIndex].setRtnDate(rtnDate);
-            this.rentalRecord[targetIndex].turnOffRecord();
+            this.rentalRecord[targetIndex].finishRecord();
             this.rentalRecord[targetIndex].setRentalFee(this.dailyRental);
             this.rentalRecord[targetIndex].setLateFee(this.lateFeeRate);
             this.rentalRecord[targetIndex].printRecord();
@@ -223,7 +218,7 @@ public abstract class RentalProperty {
 
     void finishMaintenance() {}
 
-    /*
+/*
     ArrayList<RentalRecord> findRentalRecord(String customerId) {
         ArrayList<RentalRecord> result = new ArrayList<>();
         int numOfRecords = 0;
