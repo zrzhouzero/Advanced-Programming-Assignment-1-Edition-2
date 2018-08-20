@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 class Apartment extends RentalProperty {
 
-    ArrayList<RentalRecord> maintenanceRecord = new ArrayList<>();
+    private ArrayList<RentalRecord> maintenanceRecord = new ArrayList<>();
 
     Apartment(String propertyId, String streetNum, String streetName, String suburb, int numOfBedrooms) {
         super(propertyId, streetNum, streetName, suburb);
@@ -21,7 +21,7 @@ class Apartment extends RentalProperty {
         super.lateFeeRate = super.dailyRental * 1.15;
     }
 
-    boolean checkMaintenanceStatus(DateTime rentDate, int rentalLength) {
+    private boolean checkMaintenanceStatus(DateTime rentDate, int rentalLength) {
         if (this.maintenanceRecord.size() == 0) {
             return true;
         } else {
