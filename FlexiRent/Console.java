@@ -41,13 +41,13 @@ public class Console {
             if (this.properties.get(i) instanceof PremiumSuite) {
                 if (!((PremiumSuite) this.properties.get(i)).getMaintenanceStatus()) {
                     if (this.properties.get(i).getIsAvailable()) {
-                        System.out.println(this.properties.get(i).getPropertyId() + " at " + this.properties.get(i).getDailyRental() + " per day with " + String.format("%.2f", this.properties.get(i).getLateFeeRate()) + " one excess day.");
+                        System.out.println(this.properties.get(i).getPropertyId() + " at " + String.format("%.2f", this.properties.get(i).getDailyRental()) + " per day with " + String.format("%.2f", this.properties.get(i).getLateFeeRate()) + " one excess day.");
                     }
                 }
             }
             else {
                 if (this.properties.get(i).getIsAvailable()) {
-                    System.out.println(this.properties.get(i).getPropertyId() + " at " + this.properties.get(i).getDailyRental() + " per day with " + String.format("%.2f", this.properties.get(i).getLateFeeRate()) + " one excess day.");
+                    System.out.println(this.properties.get(i).getPropertyId() + " at " + String.format("%.2f", this.properties.get(i).getDailyRental()) + " per day with " + String.format("%.2f", this.properties.get(i).getLateFeeRate()) + " one excess day.");
                 }
             }
         }
