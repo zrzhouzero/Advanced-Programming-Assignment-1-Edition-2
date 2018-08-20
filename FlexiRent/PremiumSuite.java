@@ -52,7 +52,7 @@ class PremiumSuite extends RentalProperty {
         System.out.println("Next Maintenance Date: " + this.nextMaintenanceDate.getFormattedDate());
     }
 
-    boolean checkMaintenance(DateTime rentDate, int rentalLength) {
+    private boolean checkMaintenance(DateTime rentDate, int rentalLength) {
         if (this.maintenanceStatus) {
             System.out.println("Property under maintenance.");
             return false;
@@ -73,12 +73,7 @@ class PremiumSuite extends RentalProperty {
     boolean checkAvailability(String customerId, DateTime rentDate, int rentalLength) {
         boolean previousCheck = super.checkAvailability(customerId, rentDate, rentalLength);
         boolean mCheck = this.checkMaintenance(rentDate, rentalLength);
-        if (previousCheck && mCheck) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return previousCheck && mCheck;
     }
 
     @Override
