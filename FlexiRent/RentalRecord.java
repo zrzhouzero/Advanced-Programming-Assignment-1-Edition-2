@@ -21,7 +21,7 @@ public class RentalRecord {
     }
 
     // If a record is turned off, it still can be showed but can not be returned.
-    void turnOffRecord() {
+    void finishRecord() {
         this.inUse = false;
     }
 
@@ -33,7 +33,7 @@ public class RentalRecord {
         return this.customerId;
     }
 
-    public DateTime getActRtnDate() {
+    DateTime getActRtnDate() {
         return this.actRtnDate;
     }
 
