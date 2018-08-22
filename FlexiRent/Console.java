@@ -53,6 +53,25 @@ public class Console {
         }
     }
 
+    private void printAvailablePropertiesForMaintenance() {
+        System.out.println("Currently available property ID for maintenance: ");
+        int menuLength = this.properties.size();
+        for (int i = 0; i < menuLength; i++) {
+            if (this.properties.get(i) instanceof PremiumSuite) {
+                if (!((PremiumSuite) this.properties.get(i)).getMaintenanceStatus()) {
+                    if (this.properties.get(i).getIsAvailable()) {
+                        System.out.println(this.properties.get(i).getPropertyId());
+                    }
+                }
+            }
+            else {
+                if (this.properties.get(i).getIsAvailable()) {
+                    System.out.println(this.properties.get(i).getPropertyId());
+                }
+            }
+        }
+    }
+
     private static void showMenu() {
         System.out.println("***** FLEXIRENT SYSTEM MENU *****");
         System.out.println();
@@ -158,7 +177,7 @@ public class Console {
 
             else if (choice == 4) {
                 String mtId;
-                admin.printAvailableProperties();
+                admin.printAvailablePropertiesForMaintenance();
                 System.out.println("Enter property ID:");
                 mtId = sc.nextLine();
                 int index = admin.findProperty(mtId);
