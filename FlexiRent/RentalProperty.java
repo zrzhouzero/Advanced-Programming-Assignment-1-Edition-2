@@ -2,7 +2,7 @@ package FlexiRent;
 import utilities.DateTime;
 import java.util.Scanner;
 
-public abstract class RentalProperty {
+abstract class RentalProperty {
     private String propertyId;
     private String streetNum;
     private String streetName;
@@ -196,12 +196,13 @@ public abstract class RentalProperty {
         String targetId = sc.nextLine();
         int targetIndex = this.findRentalRecord(targetId);
         if (targetIndex >= 0) {
+            DateTime rtnDate;
             System.out.println("Enter the returning date (dd/mm/yyyy):");
             String parseDate = sc.nextLine();
             int day = Integer.valueOf(parseDate.substring(0,2));
             int month = Integer.valueOf(parseDate.substring(3,5));
             int year = Integer.valueOf(parseDate.substring(6,10));
-            DateTime rtnDate = new DateTime(day, month, year);
+            rtnDate = new DateTime(day, month, year);
             this.rentalRecord[targetIndex].setRtnDate(rtnDate);
             this.rentalRecord[targetIndex].finishRecord();
             this.rentalRecord[targetIndex].setRentalFee(this.dailyRental);
