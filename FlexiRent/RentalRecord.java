@@ -59,8 +59,19 @@ public class RentalRecord {
     }
 
     void setRentalFee(double feeRate) {
-        int days = DateTime.diffDays(this.estRtnDate, this.rentDate);
-        this.rentalFee = feeRate * days;
+        int days;
+        if (DateTime.diffDays(this.estRtnDate, this.actRtnDate) <= 0) {
+            days = DateTime.diffDays(this.estRtnDate, this.rentDate);
+        }
+        else {
+            days = DateTime.diffDays(this.actRtnDate, this.rentDate);
+        }
+        if (days >= 0) {
+            this.rentalFee = feeRate * days;
+        }
+        else {
+            this.rentalFee = 0;
+        }
     }
 
     void setLateFee(double feeRate) {
