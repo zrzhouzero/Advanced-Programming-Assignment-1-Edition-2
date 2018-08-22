@@ -1,5 +1,6 @@
 package FlexiRent;
 import utilities.DateTime;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 abstract class RentalProperty {
@@ -14,6 +15,7 @@ abstract class RentalProperty {
     protected boolean underMaintenance;
     protected double dailyRental;
     protected double lateFeeRate;
+    private ArrayList<RentalRecord> notCheckIn = new ArrayList<>();
 
     RentalProperty(String propertyId, String streetNum, String streetName, String suburb) {
         this.propertyId = propertyId;
@@ -203,12 +205,21 @@ abstract class RentalProperty {
             int month = Integer.valueOf(parseDate.substring(3,5));
             int year = Integer.valueOf(parseDate.substring(6,10));
             rtnDate = new DateTime(day, month, year);
-            this.rentalRecord[targetIndex].setRtnDate(rtnDate);
-            this.rentalRecord[targetIndex].finishRecord();
-            this.rentalRecord[targetIndex].setRentalFee(this.dailyRental);
-            this.rentalRecord[targetIndex].setLateFee(this.lateFeeRate);
-            this.rentalRecord[targetIndex].printRecord();
-            this.showPropertyStatus();
+            if (DateTime.diffDays(rtnDate, this.rentalRecord[targetIndex].getRentDate()) >= 0) {
+                this.rentalRecord[targetIndex].setRtnDate(rtnDate);
+                this.rentalRecord[targetIndex].finishRecord();
+                this.rentalRecord[targetIndex].setRentalFee(this.dailyRental);
+                this.rentalRecord[targetIndex].setLateFee(this.lateFeeRate);
+                this.rentalRecord[targetIndex].printRecord();
+                this.showPropertyStatus();
+            }
+            else {
+                this.notCheckIn.add(this.rentalRecord[targetIndex]);
+                int j;
+                for (j = targetIndex; j < 9; j++) {
+                    this.rentalRecord[j] = this.rentalRecord[j + 1];
+                }
+            }
         }
         else {
             System.out.println("Return failed.");
@@ -242,4 +253,4 @@ abstract class RentalProperty {
         return result;
     }
     */
-}
+} 
